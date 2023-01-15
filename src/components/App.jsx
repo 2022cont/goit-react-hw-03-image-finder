@@ -9,23 +9,12 @@ import css from './App.module.css';
 
 class App extends Component {
   state = {
-    page: 1,
     selectedPicture: '',
     imgSearch: '',
-
-    imagesAll: [],
-
-    showLoadMore: true,
     showModal: false,
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.page !== this.state.page) {
-      this.setState({ page: this.state.page });
-    };
-  }
-
-  onSelectImg = (data) => {
+   onSelectImg = (data) => {
     this.setState({ selectedPicture: data });
     this.setState(({ showModal }) => ({
       showModal: !showModal,
@@ -33,24 +22,12 @@ class App extends Component {
   }
 
   formHandelSubmit = (data) => {
-    this.setState({ imgSearch: data, page: 1 });
+    this.setState({ imgSearch: data});
   };
-
-  loadMore = () => {
-    this.setState(prevState => ({
-      page: prevState.page + 1,
-    }));
-  };
-
-  addImagesCollection = (values) => {
-  console.log('values',values)
-    this.setState({ imagesAll: [this.state.imagesAll, ...values] })
-
-  }
 
   render() {
 
-    const { showModal, imgSearch, selectedPicture, page, showLoadMore,imagesAll} = this.state;
+    const { showModal, imgSearch, selectedPicture} = this.state;
 
     return (
 
@@ -58,15 +35,8 @@ class App extends Component {
 
         <Searchbar onSubmit={this.formHandelSubmit} />
 
-        <GalleryInfo imgSearch={imgSearch} onSelectImg={this.onSelectImg} page={page} imagesAll={imagesAll} addImagesCollection={this.addImagesCollection}/>
+        <GalleryInfo imgSearch={imgSearch} onSelectImg={this.onSelectImg} />
 
-        {showLoadMore && (
-          <button
-            type='button'
-            className={css.Button}
-            onClick={this.loadMore}
-      >Load more</button>
-        )}
 
         {showModal && (
           <Modal onClose={this.onSelectImg}>
