@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 import { ImageGallery } from './gallery/ImageGallery';
 import ImSpeenerWait from './gallery/ImSpeenerWait';
@@ -10,6 +11,11 @@ const API_KEY = '31255927-4de5778e57c1de2feb517f55b';
 const ParametersSearch = 'image_type=photo&orientation=horizontal&safesearch=true&per_page=12';
 
 export default class GalleryInfo extends Component {
+ static propTypes = {
+     onSelectImg: PropTypes.func,
+     imgSearch: PropTypes.string,
+    };
+
     state = {
         images: [],
         error: '',

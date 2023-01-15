@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import IconButton from 'components/iconbutton/IconButton';
 
 import { ImSearch } from 'react-icons/im';
@@ -6,6 +7,10 @@ import { ImSearch } from 'react-icons/im';
 import css from './Searchbar.module.css';
 
 class Searchbar extends Component {
+ static propTypes = {
+        onSubmit: PropTypes.func,
+    };
+
     state = {
         imgSearch: '',
     }
